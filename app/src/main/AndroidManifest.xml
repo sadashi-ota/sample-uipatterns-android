@@ -31,6 +31,7 @@
             android:name=".activities.AnimationIconActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.EffectActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String DRAWER_LAYOUT_SAMPLE = "DrawerLayout & NavigationView";
     private static final String BUTTONS_SAMPLE = "Buttons";
     private static final String ANIMATION_ICON_SAMPLE = "Animation Icon";
+    private static final String EFFECT_SAMPLE = "Effect";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 DRAWER_LAYOUT_SAMPLE,
                 BUTTONS_SAMPLE,
                 ANIMATION_ICON_SAMPLE,
+                EFFECT_SAMPLE,
         };
 
         ListView listSamples = findViewById(R.id.list_samples);
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case ANIMATION_ICON_SAMPLE:
                         startActivity(new Intent(MainActivity.this, AnimationIconActivity.class));
+                        break;
+                    case EFFECT_SAMPLE:
+                        startActivity(new Intent(MainActivity.this, EffectActivity.class));
                         break;
                 }
             }
