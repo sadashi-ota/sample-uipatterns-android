@@ -1,14 +1,43 @@
 # sample-uipatterns-android
 
-## Features
+Android UI patterns sample apps.
 
-- Androidに関するUIのサンプルを置く
-- 主にマテリアルデザイン関連のUI
+# Features
 
-## Requirements
+## Material Design Patterns
 
-- （作成中）
+### DrawerLayout & NavigationView
 
-## Usage
+How to implement a general navigation drawer.
 
-- （作成中）
+### Buttons
+
+How to set the style when using material design buttons.
+Specifically, raised, flat and colored buttons.
+
+### Animation Icon
+
+How to implement an animation icon using `AnimatedVectorDrawable`.
+
+### Choreography
+
+How to implement a radial reaction.
+Specifically, ripple and reveal.
+
+# License
+
+```
+Copyright 2018 Sadashi Ota
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
