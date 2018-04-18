@@ -1,4 +1,4 @@
-package jp.co.hispot.sample_uipatterns_android.activities;
+package com.sadashi.apps.ui.samples.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import jp.co.hispot.sample_uipatterns_android.R;
+import com.sadashi.apps.ui.samples.R;
 
 public class DrawerLayoutActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

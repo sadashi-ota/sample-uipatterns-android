@@ -1,4 +1,4 @@
-package jp.co.hispot.sample_uipatterns_android.activities;
+package com.sadashi.apps.ui.samples.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -12,7 +12,7 @@ import android.view.ViewAnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import jp.co.hispot.sample_uipatterns_android.R;
+import com.sadashi.apps.ui.samples.R;
 
 public class EffectActivity extends AppCompatActivity {
 

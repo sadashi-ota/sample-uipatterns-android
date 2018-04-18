@@ -1,9 +1,9 @@
-package jp.co.hispot.sample_uipatterns_android.activities;
+package com.sadashi.apps.ui.samples.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import jp.co.hispot.sample_uipatterns_android.R;
+import com.sadashi.apps.ui.samples.R;
 
 public class ButtonsActivity extends AppCompatActivity {
 

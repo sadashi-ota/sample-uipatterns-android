@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "jp.co.hispot.sample_uipatterns_android"
+        applicationId "com.sadashi.apps.ui.samples"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1

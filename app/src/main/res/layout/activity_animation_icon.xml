@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="jp.co.hispot.sample_uipatterns_android.activities.AnimationIconActivity">
+    tools:context=".activities.AnimationIconActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

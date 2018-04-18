@@ -1,4 +1,4 @@
-package jp.co.hispot.sample_uipatterns_android.activities;
+package com.sadashi.apps.ui.samples.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import jp.co.hispot.sample_uipatterns_android.R;
+import com.sadashi.apps.ui.samples.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package jp.co.hispot.sample_uipatterns_android.activities;
+package com.sadashi.apps.ui.samples.activities;
 
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import jp.co.hispot.sample_uipatterns_android.R;
+import com.sadashi.apps.ui.samples.R;
 
 public class AnimationIconActivity extends AppCompatActivity {
 

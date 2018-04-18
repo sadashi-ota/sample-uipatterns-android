@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="jp.co.hispot.sample_uipatterns_android.activities.EffectActivity">
+    tools:context=".activities.EffectActivity">
 
     <View
         android:id="@+id/base"
