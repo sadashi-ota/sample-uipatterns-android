@@ -27,14 +27,14 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/non_effect"
+            android:id="@+id/nonEffect"
             android:text="Non effect text view"
             android:padding="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/ripple_effect"
+            android:id="@+id/rippleEffect"
             android:text="Ripple effect text view"
             android:padding="16dp"
             android:background="?attr/selectableItemBackground"
@@ -44,7 +44,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/start_reveal"
+        android:id="@+id/startReveal"
         android:layout_gravity="bottom|end"
         android:src="@drawable/ic_add_24dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
