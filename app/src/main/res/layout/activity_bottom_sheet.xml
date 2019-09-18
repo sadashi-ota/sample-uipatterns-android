@@ -26,8 +26,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@android:color/black"
-        app:behavior_peekHeight="?attr/actionBarSize"
-        app:layout_behavior="@string/bottom_sheet_behavior">
+        app:behavior_customPeekHeight="?attr/actionBarSize"
+        app:layout_behavior="com.sadashi.apps.ui.samples.activities.CustomBottomSheetBehavior">
 
         <View
             android:layout_width="match_parent"

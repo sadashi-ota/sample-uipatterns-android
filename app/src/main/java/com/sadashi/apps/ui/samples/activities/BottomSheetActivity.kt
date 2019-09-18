@@ -21,12 +21,12 @@ class BottomSheetActivity : AppCompatActivity() {
 
         list.adapter = adapter
 
-        val behavior = BottomSheetBehavior.from(bottom_sheet)
+        val behavior = CustomBottomSheetBehavior.from(bottom_sheet)
         behavior.setBottomSheetCallback(callback)
         behavior.isFitToContents = false
     }
 
-    private val callback = object : BottomSheetBehavior.BottomSheetCallback() {
+    private val callback = object : CustomBottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(p0: View, p1: Float) {
         }
 
