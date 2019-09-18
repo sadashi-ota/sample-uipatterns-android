@@ -18,7 +18,6 @@ package com.sadashi.apps.ui.samples.activities;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build.VERSION;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -43,6 +42,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 
 import com.sadashi.apps.ui.samples.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -219,11 +220,11 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
         this.maximumVelocity = (float) configuration.getScaledMaximumFlingVelocity();
     }
 
-    public Parcelable onSaveInstanceState(CoordinatorLayout parent, V child) {
+    public Parcelable onSaveInstanceState(@NotNull CoordinatorLayout parent, @NotNull V child) {
         return new CustomBottomSheetBehavior.SavedState(super.onSaveInstanceState(parent, child), this.state);
     }
 
-    public void onRestoreInstanceState(CoordinatorLayout parent, V child, Parcelable state) {
+    public void onRestoreInstanceState(@NotNull CoordinatorLayout parent, @NotNull V child, @NotNull Parcelable state) {
         CustomBottomSheetBehavior.SavedState ss = (CustomBottomSheetBehavior.SavedState) state;
         super.onRestoreInstanceState(parent, child, ss.getSuperState());
         if (ss.state != STATE_DRAGGING && ss.state != STATE_SETTLING) {
@@ -234,7 +235,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
 
     }
 
-    public boolean onLayoutChild(CoordinatorLayout parent, V child, int layoutDirection) {
+    public boolean onLayoutChild(@NotNull CoordinatorLayout parent, @NotNull V child, int layoutDirection) {
         if (ViewCompat.getFitsSystemWindows(parent) && !ViewCompat.getFitsSystemWindows(child)) {
             child.setFitsSystemWindows(true);
         }
@@ -271,12 +272,12 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
             this.viewDragHelper = ViewDragHelper.create(parent, this.dragCallback);
         }
 
-        this.viewRef = new WeakReference(child);
-        this.nestedScrollingChildRef = new WeakReference(this.findScrollingChild(child));
+        this.viewRef = new WeakReference<>(child);
+        this.nestedScrollingChildRef = new WeakReference<>(this.findScrollingChild(child));
         return true;
     }
 
-    public boolean onInterceptTouchEvent(CoordinatorLayout parent, V child, MotionEvent event) {
+    public boolean onInterceptTouchEvent(@NotNull CoordinatorLayout parent, V child, @NotNull MotionEvent event) {
         if (!child.isShown()) {
             this.ignoreEvents = true;
             return false;
@@ -323,19 +324,19 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
         }
     }
 
-    public boolean onTouchEvent(CoordinatorLayout parent, V child, MotionEvent event) {
+    public boolean onTouchEvent(@NotNull CoordinatorLayout parent, V child, @NotNull MotionEvent event) {
         if (!child.isShown()) {
             return false;
         } else {
             int action = event.getActionMasked();
-            if (this.state == STATE_DRAGGING && action == 0) {
+            if (this.state == STATE_DRAGGING && action == MotionEvent.ACTION_DOWN) {
                 return true;
             } else {
                 if (this.viewDragHelper != null) {
                     this.viewDragHelper.processTouchEvent(event);
                 }
 
-                if (action == 0) {
+                if (action == MotionEvent.ACTION_DOWN) {
                     this.reset();
                 }
 
@@ -344,7 +345,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
                 }
 
                 this.velocityTracker.addMovement(event);
-                if (action == 2 && !this.ignoreEvents && Math.abs((float) this.initialY - event.getY()) > (float) this.viewDragHelper.getTouchSlop()) {
+                if (action == MotionEvent.ACTION_MOVE && !this.ignoreEvents && Math.abs((float) this.initialY - event.getY()) > (float) this.viewDragHelper.getTouchSlop()) {
                     this.viewDragHelper.captureChildView(child, event.getPointerId(event.getActionIndex()));
                 }
 
@@ -356,12 +357,12 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
     public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
         this.lastNestedScrollDy = 0;
         this.nestedScrolled = false;
-        return (axes & 2) != 0;
+        return (axes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
     public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
         if (type != 1) {
-            View scrollingChild = (View) this.nestedScrollingChildRef.get();
+            View scrollingChild = this.nestedScrollingChildRef.get();
             if (target == scrollingChild) {
                 int currentTop = child.getTop();
                 int newTop = currentTop - dy;
@@ -525,11 +526,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
                 if (child != null) {
                     ViewParent parent = child.getParent();
                     if (parent != null && parent.isLayoutRequested() && ViewCompat.isAttachedToWindow(child)) {
-                        child.post(new Runnable() {
-                            public void run() {
-                                CustomBottomSheetBehavior.this.startSettlingAnimation(child, state);
-                            }
-                        });
+                        child.post(() -> CustomBottomSheetBehavior.this.startSettlingAnimation(child, state));
                     } else {
                         this.startSettlingAnimation(child, state);
                     }
@@ -554,7 +551,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
                 this.updateImportantForAccessibility(true);
             }
 
-            View bottomSheet = (View) this.viewRef.get();
+            View bottomSheet = this.viewRef.get();
             if (bottomSheet != null && this.callback != null) {
                 this.callback.onStateChanged(bottomSheet, state);
             }
@@ -655,7 +652,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
     }
 
     void dispatchOnSlide(int top) {
-        View bottomSheet = (View) this.viewRef.get();
+        View bottomSheet = this.viewRef.get();
         if (bottomSheet != null && this.callback != null) {
             if (top > this.collapsedOffset) {
                 this.callback.onSlide(bottomSheet, (float) (this.collapsedOffset - top) / (float) (this.parentHeight - this.collapsedOffset));
@@ -679,24 +676,23 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
             Behavior behavior = ((android.support.design.widget.CoordinatorLayout.LayoutParams) params).getBehavior();
             if (!(behavior instanceof CustomBottomSheetBehavior)) {
                 throw new IllegalArgumentException("The view is not associated with CustomBottomSheetBehavior");
-            } else {
-                return (CustomBottomSheetBehavior) behavior;
             }
+            return (CustomBottomSheetBehavior) behavior;
         }
     }
 
     private void updateImportantForAccessibility(boolean expanded) {
         if (this.viewRef != null) {
-            ViewParent viewParent = ((View) this.viewRef.get()).getParent();
+            ViewParent viewParent = (this.viewRef.get()).getParent();
             if (viewParent instanceof CoordinatorLayout) {
                 CoordinatorLayout parent = (CoordinatorLayout) viewParent;
                 int childCount = parent.getChildCount();
-                if (VERSION.SDK_INT >= 16 && expanded) {
+                if (expanded) {
                     if (this.importantForAccessibilityMap != null) {
                         return;
                     }
 
-                    this.importantForAccessibilityMap = new HashMap(childCount);
+                    this.importantForAccessibilityMap = new HashMap<>(childCount);
                 }
 
                 for (int i = 0; i < childCount; ++i) {
@@ -704,14 +700,11 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
                     if (child != this.viewRef.get()) {
                         if (!expanded) {
                             if (this.importantForAccessibilityMap != null && this.importantForAccessibilityMap.containsKey(child)) {
-                                ViewCompat.setImportantForAccessibility(child, (Integer) this.importantForAccessibilityMap.get(child));
+                                ViewCompat.setImportantForAccessibility(child, this.importantForAccessibilityMap.get(child));
                             }
                         } else {
-                            if (VERSION.SDK_INT >= 16) {
-                                this.importantForAccessibilityMap.put(child, child.getImportantForAccessibility());
-                            }
-
-                            ViewCompat.setImportantForAccessibility(child, 4);
+                            this.importantForAccessibilityMap.put(child, child.getImportantForAccessibility());
+                            ViewCompat.setImportantForAccessibility(child, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
                         }
                     }
                 }
@@ -732,7 +725,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
             }
 
             public CustomBottomSheetBehavior.SavedState createFromParcel(Parcel in) {
-                return new CustomBottomSheetBehavior.SavedState(in, (ClassLoader) null);
+                return new CustomBottomSheetBehavior.SavedState(in, null);
             }
 
             public CustomBottomSheetBehavior.SavedState[] newArray(int size) {
@@ -741,7 +734,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
         };
 
         public SavedState(Parcel source) {
-            this(source, (ClassLoader) null);
+            this(source, null);
         }
 
         public SavedState(Parcel source, ClassLoader loader) {
