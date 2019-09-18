@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sadashi.apps.ui.samples.activities;
+package com.sadashi.apps.ui.samples.activities.bottomsheet;
 
 import android.content.Context;
 import android.content.res.TypedArray;

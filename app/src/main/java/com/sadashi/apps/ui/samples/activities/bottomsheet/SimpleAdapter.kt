@@ -1,4 +1,4 @@
-package com.sadashi.apps.ui.samples.activities
+package com.sadashi.apps.ui.samples.activities.bottomsheet
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
