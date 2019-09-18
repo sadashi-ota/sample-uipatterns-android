@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.sadashi.apps.ui.samples.R
-import com.sadashi.apps.ui.samples.activities.AnimationIconActivity
-import com.sadashi.apps.ui.samples.activities.ButtonsActivity
-import com.sadashi.apps.ui.samples.activities.DrawerLayoutActivity
-import com.sadashi.apps.ui.samples.activities.EffectActivity
+import com.sadashi.apps.ui.samples.activities.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +29,8 @@ class MainActivity : AppCompatActivity() {
                 SampleScreenItem(DrawerLayoutActivity::class, "DrawerLayout & NavigationView"),
                 SampleScreenItem(ButtonsActivity::class, "Buttons"),
                 SampleScreenItem(AnimationIconActivity::class, "Animation Icon"),
-                SampleScreenItem(EffectActivity::class, "Effect")
+                SampleScreenItem(EffectActivity::class, "Effect"),
+                SampleScreenItem(BottomSheetActivity::class, "Bottom Sheet")
         )
     }
 }
