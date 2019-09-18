@@ -31,7 +31,6 @@ class BottomSheetActivity : AppCompatActivity() {
         }
 
         override fun onStateChanged(p0: View, p1: Int) {
-            Log.d("TEST","state : $p1")
         }
     }
 

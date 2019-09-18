@@ -7,5 +7,6 @@
         <attr name="behavior_customHideable" format="boolean" />
         <attr name="behavior_customSkipCollapsed" format="boolean" />
         <attr name="behavior_customFitToContents" format="boolean" />
+        <attr name="behavior_halfwayExpandRatio" format="float" />
     </declare-styleable>
 </resources>

@@ -57,7 +57,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
     public static final int STATE_EXPANDED = 3;
     public static final int STATE_COLLAPSED = 4;
     public static final int STATE_HIDDEN = 5;
-    public static final int STATE_HALF_EXPANDED = 6;
+    public static final int STATE_HALFWAY_EXPANDED = 6;
     public static final int PEEK_HEIGHT_AUTO = -1;
     private static final float HIDE_THRESHOLD = 0.5F;
     private static final float HIDE_FRICTION = 0.1F;
@@ -68,8 +68,9 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
     private int peekHeightMin;
     private int lastPeekHeight;
     int fitToContentsOffset;
-    int halfExpandedOffset;
+    int halfwayExpandedOffset;
     int collapsedOffset;
+    float halfwayExpandedRatio;
     boolean hideable;
     private boolean skipCollapsed;
     int state = STATE_COLLAPSED;
@@ -130,9 +131,9 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
                     targetState = STATE_EXPANDED;
                 } else {
                     currentTop = releasedChild.getTop();
-                    if (currentTop > CustomBottomSheetBehavior.this.halfExpandedOffset) {
-                        top = CustomBottomSheetBehavior.this.halfExpandedOffset;
-                        targetState = STATE_HALF_EXPANDED;
+                    if (currentTop > CustomBottomSheetBehavior.this.halfwayExpandedOffset) {
+                        top = CustomBottomSheetBehavior.this.halfwayExpandedOffset;
+                        targetState = STATE_HALFWAY_EXPANDED;
                     } else {
                         top = 0;
                         targetState = STATE_EXPANDED;
@@ -152,17 +153,17 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
                             top = CustomBottomSheetBehavior.this.collapsedOffset;
                             targetState = STATE_COLLAPSED;
                         }
-                    } else if (currentTop < CustomBottomSheetBehavior.this.halfExpandedOffset) {
+                    } else if (currentTop < CustomBottomSheetBehavior.this.halfwayExpandedOffset) {
                         if (currentTop < Math.abs(currentTop - CustomBottomSheetBehavior.this.collapsedOffset)) {
                             top = 0;
                             targetState = STATE_EXPANDED;
                         } else {
-                            top = CustomBottomSheetBehavior.this.halfExpandedOffset;
-                            targetState = STATE_HALF_EXPANDED;
+                            top = CustomBottomSheetBehavior.this.halfwayExpandedOffset;
+                            targetState = STATE_HALFWAY_EXPANDED;
                         }
-                    } else if (Math.abs(currentTop - CustomBottomSheetBehavior.this.halfExpandedOffset) < Math.abs(currentTop - CustomBottomSheetBehavior.this.collapsedOffset)) {
-                        top = CustomBottomSheetBehavior.this.halfExpandedOffset;
-                        targetState = STATE_HALF_EXPANDED;
+                    } else if (Math.abs(currentTop - CustomBottomSheetBehavior.this.halfwayExpandedOffset) < Math.abs(currentTop - CustomBottomSheetBehavior.this.collapsedOffset)) {
+                        top = CustomBottomSheetBehavior.this.halfwayExpandedOffset;
+                        targetState = STATE_HALFWAY_EXPANDED;
                     } else {
                         top = CustomBottomSheetBehavior.this.collapsedOffset;
                         targetState = STATE_COLLAPSED;
@@ -215,6 +216,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
         this.setHideable(a.getBoolean(R.styleable.CustomBottomSheetBehavior_Layout_behavior_customHideable, false));
         this.setFitToContents(a.getBoolean(R.styleable.CustomBottomSheetBehavior_Layout_behavior_customFitToContents, true));
         this.setSkipCollapsed(a.getBoolean(R.styleable.CustomBottomSheetBehavior_Layout_behavior_customSkipCollapsed, false));
+        this.setHalfwayExpandedRatio(a.getFloat(R.styleable.CustomBottomSheetBehavior_Layout_behavior_halfwayExpandRatio, 0.5F));
         a.recycle();
         ViewConfiguration configuration = ViewConfiguration.get(context);
         this.maximumVelocity = (float) configuration.getScaledMaximumFlingVelocity();
@@ -254,12 +256,12 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
         }
 
         this.fitToContentsOffset = Math.max(0, this.parentHeight - child.getHeight());
-        this.halfExpandedOffset = this.parentHeight / 2;
+        this.halfwayExpandedOffset = Math.round(this.parentHeight * this.halfwayExpandedRatio);
         this.calculateCollapsedOffset();
         if (this.state == STATE_EXPANDED) {
             ViewCompat.offsetTopAndBottom(child, this.getExpandedOffset());
-        } else if (this.state == STATE_HALF_EXPANDED) {
-            ViewCompat.offsetTopAndBottom(child, this.halfExpandedOffset);
+        } else if (this.state == STATE_HALFWAY_EXPANDED) {
+            ViewCompat.offsetTopAndBottom(child, this.halfwayExpandedOffset);
         } else if (this.hideable && this.state == STATE_HIDDEN) {
             ViewCompat.offsetTopAndBottom(child, this.parentHeight);
         } else if (this.state == STATE_COLLAPSED) {
@@ -417,17 +419,17 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
                         top = this.collapsedOffset;
                         targetState = STATE_COLLAPSED;
                     }
-                } else if (currentTop < this.halfExpandedOffset) {
+                } else if (currentTop < this.halfwayExpandedOffset) {
                     if (currentTop < Math.abs(currentTop - this.collapsedOffset)) {
                         top = 0;
                         targetState = STATE_EXPANDED;
                     } else {
-                        top = this.halfExpandedOffset;
-                        targetState = STATE_HALF_EXPANDED;
+                        top = this.halfwayExpandedOffset;
+                        targetState = STATE_HALFWAY_EXPANDED;
                     }
-                } else if (Math.abs(currentTop - this.halfExpandedOffset) < Math.abs(currentTop - this.collapsedOffset)) {
-                    top = this.halfExpandedOffset;
-                    targetState = STATE_HALF_EXPANDED;
+                } else if (Math.abs(currentTop - this.halfwayExpandedOffset) < Math.abs(currentTop - this.collapsedOffset)) {
+                    top = this.halfwayExpandedOffset;
+                    targetState = STATE_HALFWAY_EXPANDED;
                 } else {
                     top = this.collapsedOffset;
                     targetState = STATE_COLLAPSED;
@@ -463,7 +465,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
                 this.calculateCollapsedOffset();
             }
 
-            this.setStateInternal(this.fitToContents && this.state == STATE_HALF_EXPANDED ? STATE_EXPANDED : this.state);
+            this.setStateInternal(this.fitToContents && this.state == STATE_HALFWAY_EXPANDED ? STATE_EXPANDED : this.state);
         }
     }
 
@@ -510,6 +512,15 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
         return this.skipCollapsed;
     }
 
+    public void setHalfwayExpandedRatio(float ratio) {
+        this.halfwayExpandedRatio = ratio;
+        this.halfwayExpandedOffset = Math.round(this.parentHeight * this.halfwayExpandedRatio);
+    }
+
+    public float getHalfwayExpandedRatio() {
+        return this.halfwayExpandedRatio;
+    }
+
     public void setBottomSheetCallback(CustomBottomSheetBehavior.BottomSheetCallback callback) {
         this.callback = callback;
     }
@@ -517,7 +528,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
     public final void setState(final int state) {
         if (state != this.state) {
             if (this.viewRef == null) {
-                if (state == STATE_COLLAPSED || state == STATE_EXPANDED || state == STATE_HALF_EXPANDED || this.hideable && state == STATE_HIDDEN) {
+                if (state == STATE_COLLAPSED || state == STATE_EXPANDED || state == STATE_HALFWAY_EXPANDED || this.hideable && state == STATE_HIDDEN) {
                     this.state = state;
                 }
 
@@ -543,7 +554,7 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
     void setStateInternal(int state) {
         if (this.state != state) {
             this.state = state;
-            if (state != STATE_HALF_EXPANDED && state != STATE_EXPANDED) {
+            if (state != STATE_HALFWAY_EXPANDED && state != STATE_EXPANDED) {
                 if (state == STATE_HIDDEN || state == STATE_COLLAPSED) {
                     this.updateImportantForAccessibility(false);
                 }
@@ -626,8 +637,8 @@ public class CustomBottomSheetBehavior<V extends View> extends Behavior<V> {
         int top;
         if (state == STATE_COLLAPSED) {
             top = this.collapsedOffset;
-        } else if (state == STATE_HALF_EXPANDED) {
-            top = this.halfExpandedOffset;
+        } else if (state == STATE_HALFWAY_EXPANDED) {
+            top = this.halfwayExpandedOffset;
             if (this.fitToContents && top <= this.fitToContentsOffset) {
                 state = STATE_EXPANDED;
                 top = this.fitToContentsOffset;
