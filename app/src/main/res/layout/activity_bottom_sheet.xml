@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.BottomSheetActivity">
+    tools:context=".activities.bottomsheet.BottomSheetActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:background="@android:color/black"
         app:behavior_customPeekHeight="?attr/actionBarSize"
         app:behavior_halfwayExpandRatio="0.3"
-        app:layout_behavior="com.sadashi.apps.ui.samples.activities.CustomBottomSheetBehavior">
+        app:layout_behavior="com.sadashi.apps.ui.samples.activities.bottomsheet.CustomBottomSheetBehavior">
 
         <View
             android:layout_width="match_parent"

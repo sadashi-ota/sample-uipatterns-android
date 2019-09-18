@@ -1,15 +1,10 @@
-package com.sadashi.apps.ui.samples.activities
+package com.sadashi.apps.ui.samples.activities.bottomsheet
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.sadashi.apps.ui.samples.R
 import kotlinx.android.synthetic.main.activity_bottom_sheet.*
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CoordinatorLayout
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 
 class BottomSheetActivity : AppCompatActivity() {
 
