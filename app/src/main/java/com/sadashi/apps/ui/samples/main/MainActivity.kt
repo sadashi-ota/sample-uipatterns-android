@@ -2,7 +2,7 @@ package com.sadashi.apps.ui.samples.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.sadashi.apps.ui.samples.R
 import com.sadashi.apps.ui.samples.activities.*
 import com.sadashi.apps.ui.samples.activities.bottomsheet.BottomSheetActivity
@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
                 SampleScreenItem(ButtonsActivity::class, "Buttons"),
                 SampleScreenItem(AnimationIconActivity::class, "Animation Icon"),
                 SampleScreenItem(EffectActivity::class, "Effect"),
-                SampleScreenItem(BottomSheetActivity::class, "Bottom Sheet")
+                SampleScreenItem(BottomSheetActivity::class, "Bottom Sheet"),
+                SampleScreenItem(InputPasswordActivity::class, "Input Password")
         )
     }
 }

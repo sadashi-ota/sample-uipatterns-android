@@ -4,9 +4,9 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.graphics.Point
 import android.os.Bundle
-import android.support.annotation.ColorRes
-import android.support.annotation.StringRes
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.Toast
