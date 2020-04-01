@@ -24,6 +24,10 @@ How to implement an animation icon using `AnimatedVectorDrawable`.
 How to implement a radial reaction.
 Specifically, ripple and reveal.
 
+### Password Input
+
+How to implement a password `EditText` to use `TextInputLayout`.
+
 # License
 
 ```
