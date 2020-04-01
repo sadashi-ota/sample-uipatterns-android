@@ -2,7 +2,7 @@ package com.sadashi.apps.ui.samples.activities
 
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.sadashi.apps.ui.samples.R
 import kotlinx.android.synthetic.main.activity_animation_icon.*
 

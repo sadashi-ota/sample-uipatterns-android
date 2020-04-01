@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".main.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="unspecified">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,21 +26,26 @@
         <activity
             android:name=".activities.DrawerLayoutActivity"
             android:label="@string/title_activity_drawer_layout"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ButtonsActivity"
             android:label="@string/title_activity_buttons"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".activities.AnimationIconActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.EffectActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".activities.bottomsheet.BottomSheetActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".activities.bottomsheet.BottomSheetActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.InputPasswordActivity"
+            android:screenOrientation="unspecified"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

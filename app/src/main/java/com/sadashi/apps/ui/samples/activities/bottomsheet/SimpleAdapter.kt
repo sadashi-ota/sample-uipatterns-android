@@ -1,6 +1,6 @@
 package com.sadashi.apps.ui.samples.activities.bottomsheet
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.sadashi.apps.ui.samples.R
