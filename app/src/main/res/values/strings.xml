@@ -11,8 +11,12 @@
     <string name="message_tap_ripple_effect_text">Tap ripple effect text</string>
     <string name="message_tap_non_effect_text">Tap non effect text</string>
 
-    <string name="hint_input_username">username</string>
+    <string name="hint_input_domain">domain</string>
+    <string name="hint_input_proxy">proxy</string>
+    <string name="hint_input_port">port</string>
+    <string name="hint_input_id">id</string>
     <string name="hint_input_password">password</string>
 
+    <string name="text_enable_proxy">Enable Proxy</string>
     <string name="text_done">Done</string>
 </resources>

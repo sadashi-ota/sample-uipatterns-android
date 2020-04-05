@@ -45,8 +45,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.InputPasswordActivity"
-            android:screenOrientation="unspecified"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>
